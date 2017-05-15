@@ -31,9 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -165,15 +163,6 @@ public class Notification {
      * Schedule the local notification.
      */
     public void schedule() {
-
-        PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK
-                        | PowerManager.ON_AFTER_RELEASE | PowerManager.ACQUIRE_CAUSES_WAKEUP
-                , "wakeup");
-        wl.acquire();
-        Log.d("Notification","Screen awakened");
-        wl.release();
-
         long triggerTime = options.getTriggerTime();
 
         persist();
@@ -353,4 +342,3 @@ public class Notification {
     }
 
 }
-
