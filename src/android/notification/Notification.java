@@ -163,6 +163,15 @@ public class Notification {
      * Schedule the local notification.
      */
     public void schedule() {
+
+        PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK
+                        | PowerManager.ON_AFTER_RELEASE | PowerManager.ACQUIRE_CAUSES_WAKEUP
+                , "wakeup");
+        wl.acquire();
+        Log.d("Notification","Screen awakened");
+        wl.release();
+
         long triggerTime = options.getTriggerTime();
 
         persist();
